@@ -1,0 +1,154 @@
+#
+# An unexpected error has been detected by Java Runtime Environment:
+#
+#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x6da669a2, pid=31064, tid=41228
+#
+# Java VM: Java HotSpot(TM) Client VM (11.3-b02 mixed mode windows-x86)
+# Problematic frame:
+# V  [jvm.dll+0x1b69a2]
+#
+# If you would like to submit a bug report, please visit:
+#   http://java.sun.com/webapps/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0239d800):  JavaThread "JDWP Transport Listener: dt_socket" daemon [_thread_in_vm, id=41228, stack(0x0c8e0000,0x0c930000)]
+
+siginfo: ExceptionCode=0xc0000005, reading address 0x0000000c
+
+Registers:
+EAX=0x00000000, EBX=0x0000000c, ECX=0x0000000c, EDX=0x00000000
+ESP=0x0c92fa20, EBP=0x6d44e93c, ESI=0x0000000c, EDI=0x00000004
+EIP=0x6da669a2, EFLAGS=0x00010202
+
+Top of Stack: (sp=0x0c92fa20)
+0x0c92fa20:   0239ceb8 00000004 6da669e3 0000000c
+0x0c92fa30:   00000004 6d44e0fc 0239ceb8 6d44e93c
+0x0c92fa40:   6d44e114 6d97b87d 0000000c 00000004
+0x0c92fa50:   6d98bc6f 043f6f88 6d44e0fc 0239d914
+0x0c92fa60:   6d44e93c 6d44e114 0239d800 00000000
+0x0c92fa70:   6d449b79 0239d914 0c92fabc 023888e0
+0x0c92fa80:   023888e8 02388cd4 6d4362bd 0239d800
+0x0c92fa90:   0ce8e140 00000000 0c92fabc 0c92fc58 
+
+Instructions: (pc=0x6da669a2)
+0x6da66992:   7c 24 0c 33 c0 33 d2 85 ff 7e 2d 56 8b 74 24 0c
+0x6da669a2:   66 8b 0c 56 66 83 f9 01 72 09 66 83 f9 7f 77 03 
+
+
+Stack: [0x0c8e0000,0x0c930000],  sp=0x0c92fa20,  free space=318k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x1b69a2]
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x0ce44400 JavaThread "Thread-1" [_thread_blocked, id=41940, stack(0x0cf30000,0x0cf80000)]
+  0x0ce43800 JavaThread "Thread-0" [_thread_blocked, id=40812, stack(0x0cea0000,0x0cef0000)]
+  0x0cca0400 JavaThread "Low Memory Detector" daemon [_thread_blocked, id=10768, stack(0x0cb40000,0x0cb90000)]
+  0x023ab000 JavaThread "CompilerThread0" daemon [_thread_blocked, id=27388, stack(0x0cab0000,0x0cb00000)]
+  0x023a0800 JavaThread "JDWP Command Reader" daemon [_thread_in_native, id=2352, stack(0x0ca00000,0x0ca50000)]
+  0x023a0000 JavaThread "JDWP Event Helper Thread" daemon [_thread_blocked, id=21884, stack(0x0c970000,0x0c9c0000)]
+=>0x0239d800 JavaThread "JDWP Transport Listener: dt_socket" daemon [_thread_in_vm, id=41228, stack(0x0c8e0000,0x0c930000)]
+  0x023cf800 JavaThread "Attach Listener" daemon [_thread_blocked, id=15800, stack(0x0c6d0000,0x0c720000)]
+  0x02383c00 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=52644, stack(0x0c640000,0x0c690000)]
+  0x02370800 JavaThread "Finalizer" daemon [_thread_blocked, id=27544, stack(0x0c5b0000,0x0c600000)]
+  0x0236c000 JavaThread "Reference Handler" daemon [_thread_blocked, id=23068, stack(0x0c520000,0x0c570000)]
+  0x021cb000 JavaThread "main" [_thread_blocked, id=42564, stack(0x003a0000,0x003f0000)]
+
+Other Threads:
+  0x02368c00 VMThread [stack: 0x0c490000,0x0c4e0000] [id=18032]
+  0x0ccac000 WatcherThread [stack: 0x0cbd0000,0x0cc20000] [id=26368]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap
+ def new generation   total 960K, used 219K [0x043d0000, 0x044d0000, 0x048b0000)
+  eden space 896K,  17% used [0x043d0000, 0x043f6fa0, 0x044b0000)
+  from space 64K,  99% used [0x044c0000, 0x044cfff8, 0x044d0000)
+  to   space 64K,   0% used [0x044b0000, 0x044b0000, 0x044c0000)
+ tenured generation   total 7040K, used 4750K [0x048b0000, 0x04f90000, 0x083d0000)
+   the space 7040K,  67% used [0x048b0000, 0x04d53880, 0x04d53a00, 0x04f90000)
+ compacting perm gen  total 12288K, used 6320K [0x083d0000, 0x08fd0000, 0x0c3d0000)
+   the space 12288K,  51% used [0x083d0000, 0x089fc1c8, 0x089fc200, 0x08fd0000)
+No shared spaces configured.
+
+Dynamic libraries:
+0x00400000 - 0x00424000 	C:\Users\Luopy\AppData\Local\MyEclipse\Common\binary\com.sun.java.jdk.win32.x86_1.6.0.013\bin\javaw.exe
+0x77570000 - 0x776f0000 	C:\Windows\SysWOW64\ntdll.dll
+0x76890000 - 0x769a0000 	C:\Windows\syswow64\kernel32.dll
+0x76dc0000 - 0x76e07000 	C:\Windows\syswow64\KERNELBASE.dll
+0x76b40000 - 0x76be0000 	C:\Windows\syswow64\ADVAPI32.dll
+0x767e0000 - 0x7688c000 	C:\Windows\syswow64\msvcrt.dll
+0x750d0000 - 0x750e9000 	C:\Windows\SysWOW64\sechost.dll
+0x75fd0000 - 0x760c0000 	C:\Windows\syswow64\RPCRT4.dll
+0x74fd0000 - 0x75030000 	C:\Windows\syswow64\SspiCli.dll
+0x74fc0000 - 0x74fcc000 	C:\Windows\syswow64\CRYPTBASE.dll
+0x761e0000 - 0x762e0000 	C:\Windows\syswow64\USER32.dll
+0x763b0000 - 0x76440000 	C:\Windows\syswow64\GDI32.dll
+0x750f0000 - 0x750fa000 	C:\Windows\syswow64\LPK.dll
+0x76e10000 - 0x76ead000 	C:\Windows\syswow64\USP10.dll
+0x76180000 - 0x761e0000 	C:\Windows\system32\IMM32.DLL
+0x765e0000 - 0x766ac000 	C:\Windows\syswow64\MSCTF.dll
+0x7c340000 - 0x7c396000 	C:\Users\Luopy\AppData\Local\MyEclipse\Common\binary\com.sun.java.jdk.win32.x86_1.6.0.013\jre\bin\msvcr71.dll
+0x6d8b0000 - 0x6db06000 	C:\Users\Luopy\AppData\Local\MyEclipse\Common\binary\com.sun.java.jdk.win32.x86_1.6.0.013\jre\bin\client\jvm.dll
+0x74ba0000 - 0x74bd2000 	C:\Windows\system32\WINMM.dll
+0x74680000 - 0x746cc000 	C:\Windows\system32\apphelp.dll
+0x6d340000 - 0x6d348000 	C:\Users\Luopy\AppData\Local\MyEclipse\Common\binary\com.sun.java.jdk.win32.x86_1.6.0.013\jre\bin\hpi.dll
+0x766b0000 - 0x766b5000 	C:\Windows\syswow64\PSAPI.DLL
+0x6d430000 - 0x6d459000 	C:\Users\Luopy\AppData\Local\MyEclipse\Common\binary\com.sun.java.jdk.win32.x86_1.6.0.013\jre\bin\jdwp.dll
+0x6d750000 - 0x6d756000 	C:\Users\Luopy\AppData\Local\MyEclipse\Common\binary\com.sun.java.jdk.win32.x86_1.6.0.013\jre\bin\npt.dll
+0x6d860000 - 0x6d86c000 	C:\Users\Luopy\AppData\Local\MyEclipse\Common\binary\com.sun.java.jdk.win32.x86_1.6.0.013\jre\bin\verify.dll
+0x6d3e0000 - 0x6d3ff000 	C:\Users\Luopy\AppData\Local\MyEclipse\Common\binary\com.sun.java.jdk.win32.x86_1.6.0.013\jre\bin\java.dll
+0x6d8a0000 - 0x6d8af000 	C:\Users\Luopy\AppData\Local\MyEclipse\Common\binary\com.sun.java.jdk.win32.x86_1.6.0.013\jre\bin\zip.dll
+0x6d2b0000 - 0x6d2b7000 	C:\Users\Luopy\AppData\Local\MyEclipse\Common\binary\com.sun.java.jdk.win32.x86_1.6.0.013\jre\bin\dt_socket.dll
+0x76440000 - 0x76475000 	C:\Windows\syswow64\WS2_32.dll
+0x77540000 - 0x77546000 	C:\Windows\syswow64\NSI.dll
+0x742f0000 - 0x74300000 	C:\Windows\system32\NLAapi.dll
+0x742e0000 - 0x742f0000 	C:\Windows\system32\napinsp.dll
+0x742c0000 - 0x742d2000 	C:\Windows\system32\pnrpnsp.dll
+0x74280000 - 0x742bc000 	C:\Windows\System32\mswsock.dll
+0x74230000 - 0x74274000 	C:\Windows\system32\DNSAPI.dll
+0x74210000 - 0x74218000 	C:\Windows\System32\winrnr.dll
+0x74c70000 - 0x74c8c000 	C:\Windows\system32\IPHLPAPI.DLL
+0x74c60000 - 0x74c67000 	C:\Windows\system32\WINNSI.DLL
+0x741c0000 - 0x741f8000 	C:\Windows\System32\fwpuclnt.dll
+0x74170000 - 0x74176000 	C:\Windows\system32\rasadhlp.dll
+0x74220000 - 0x74225000 	C:\Windows\System32\wshtcpip.dll
+0x6d6c0000 - 0x6d6d3000 	C:\Users\Luopy\AppData\Local\MyEclipse\Common\binary\com.sun.java.jdk.win32.x86_1.6.0.013\jre\bin\net.dll
+0x73750000 - 0x73756000 	C:\Windows\System32\wship6.dll
+0x6d6e0000 - 0x6d6e9000 	C:\Users\Luopy\AppData\Local\MyEclipse\Common\binary\com.sun.java.jdk.win32.x86_1.6.0.013\jre\bin\nio.dll
+0x6d610000 - 0x6d619000 	C:\Users\Luopy\AppData\Local\MyEclipse\Common\binary\com.sun.java.jdk.win32.x86_1.6.0.013\jre\bin\management.dll
+
+VM Arguments:
+jvm_args: -agentlib:jdwp=transport=dt_socket,suspend=y,address=localhost:14203 -Dfile.encoding=UTF-8 
+java_command: com.yqjk.service.Test
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=C:\Program Files (x86)\Java\jdk1.7.0_01
+CLASSPATH=.;C:\Program Files (x86)\Java\jdk1.7.0_01\lib\dt.jar;C:\Program Files (x86)\Java\jdk1.7.0_01\lib\tools.jar
+PATH=C:\Users\Luopy\AppData\Local\MyEclipse\Common\binary\com.sun.java.jdk.win32.x86_1.6.0.013\jre\bin;C:/Users/Luopy/AppData/Local/MyEclipse/Common/binary/com.sun.java.jdk.win32.x86_1.6.0.013/jre/bin/client;C:/Users/Luopy/AppData/Local/MyEclipse/Common/binary/com.sun.java.jdk.win32.x86_1.6.0.013/jre/bin;F:\oracle\product\10.2.0\db_1\bin;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\OpenCL SDK\3.0\bin\x86;C:\Program Files (x86)\Intel\OpenCL SDK\3.0\bin\x64;C:\Program Files\Microsoft\Web Platform Installer\;C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET Web Pages\v1.0\;C:\Program Files (x86)\Windows Kits\8.0\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\;C:\Program Files\Microsoft SQL Server\100\Tools\Binn\;C:\Program Files\Microsoft SQL Server\100\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\;C:\Program Files (x86)\Microsoft SQL Server\100\DTS\Binn\;C:\Program Files (x86)\Microsoft Visual Studio 9.0\Common7\IDE\PrivateAssemblies\;C:\Program Files\TortoiseSVN\bin;C:\Go\bin;C:\Program Files (x86)\Java\jdk1.7.0_01\bin;C:\Program Files (x86)\Java\jdk1.7.0_01\jre\bin;E:\apache-tomcat-7.0.42\bin;E:\apache-tomcat-7.0.42\lib\servlet-api.jar;C:\strawberry\c\bin;C:\strawberry\perl\site\bin;C:\strawberry\perl\bin
+USERNAME=Luopy
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 58 Stepping 9, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows NT 6.1 Build 7601 Service Pack 1
+
+CPU:total 4 (8 cores per cpu, 2 threads per core) family 6 model 10 stepping 9, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, ht
+
+Memory: 4k page, physical 4083448k(856712k free), swap 4194303k(1303388k free)
+
+vm_info: Java HotSpot(TM) Client VM (11.3-b02) for windows-x86 JRE (1.6.0_13-b03), built on Mar  9 2009 01:15:24 by "java_re" with MS VC++ 7.1
+
+time: Tue Nov 19 19:59:50 2013
+elapsed time: 117 seconds
+
