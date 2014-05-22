@@ -1334,12 +1334,12 @@ public class IndexServer {
 						* pagecount);
 			} else if (sortbyfbtime == 1) {// 监测时间降序
 				Sort str = new Sort();
-				str.setSort(new SortField("spy", Type.LONG, true));
+				str.setSort(new SortField("releasetime", Type.LONG, true)); //
 				docsall = searcher.search(blsearchquery, flmain, pageindex
 						* pagecount, str);
 			} else {// 监测时间升序
 				Sort str = new Sort();
-				str.setSort(new SortField("spy", Type.LONG, false));
+				str.setSort(new SortField("releasetime", Type.LONG, false)); // 巡检按发布时间（王总）
 				docsall = searcher.search(blsearchquery, flmain, pageindex
 						* pagecount, str);
 			}
@@ -1354,17 +1354,23 @@ public class IndexServer {
 
 				model.url = doc.get("url");
 				model.tabletype = doc.get("zdbs");
+				
+				System.out.println(model.url);
 
 				if (doc.get("spy") != null) {
+					
+					System.out.println(doc.get("spy") );
+					
 					Date dt = DateTools.stringToDate(DateTools.timeToString(
 							Long.parseLong(doc.get("spy")), Resolution.SECOND));
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 					Date dtnow = new Date();
 					dtnow = sdf.parse(sdf.format(dtnow));
-
+					
+					System.out.println(dt);
+					
 					if (dt.before(dtnow)) {
 						model.sqltype = "1";
-
 					} else {
 						model.sqltype = "0";
 					}
