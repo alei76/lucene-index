@@ -42,6 +42,18 @@
   <message name="SearchAllResponse">
     <part element="tns:SearchAllResponse" name="parameters"/>
   </message>
+  <message name="SearchAllWithTypeFilter">
+    <part element="tns:SearchAllWithTypeFilter" name="parameters"/>
+  </message>
+  <message name="SearchAllWithTypeFilterResponse">
+    <part element="tns:SearchAllWithTypeFilterResponse" name="parameters"/>
+  </message>
+  <message name="GetAnalyzeResult">
+    <part element="tns:GetAnalyzeResult" name="parameters"/>
+  </message>
+  <message name="GetAnalyzeResultResponse">
+    <part element="tns:GetAnalyzeResultResponse" name="parameters"/>
+  </message>
   <message name="GetMessageSearchAll">
     <part element="tns:GetMessageSearchAll" name="parameters"/>
   </message>
@@ -90,6 +102,14 @@
     <operation name="SearchAll">
       <input message="tns:SearchAll"/>
       <output message="tns:SearchAllResponse"/>
+    </operation>
+    <operation name="SearchAllWithTypeFilter">
+      <input message="tns:SearchAllWithTypeFilter"/>
+      <output message="tns:SearchAllWithTypeFilterResponse"/>
+    </operation>
+    <operation name="GetAnalyzeResult">
+      <input message="tns:GetAnalyzeResult"/>
+      <output message="tns:GetAnalyzeResultResponse"/>
     </operation>
     <operation name="GetMessageSearchAll">
       <input message="tns:GetMessageSearchAll"/>
@@ -156,6 +176,24 @@
       </output>
     </operation>
     <operation name="SearchAll">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="SearchAllWithTypeFilter">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="GetAnalyzeResult">
       <soap:operation soapAction=""/>
       <input>
         <soap:body use="literal"/>

@@ -99,109 +99,14 @@ public class SearchIndex {
 		return getSingleSearchIndex();
 	}
 
-	// private static void ChangeSearchBase() {
-	// // TODO Auto-generated method stub
-	// try {
-	//
-	// isChanged = true;
-	// singleSearchIndex.List.clear();
-	// singleSearchIndex.ListHis.clear();
-	// Date dt = new Date();
-	// SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-	//
-	// for (int i = 0; i < ServerConfig.getInstance().getMaxSearchDays(); i++) {
-	// Calendar calendar = Calendar.getInstance();
-	// calendar.add(Calendar.DATE, -i);
-	// dt = calendar.getTime();
-	// String Today = sdf.format(dt);
-	// String path = ServerConfig.getInstance().getLocalIndexPath()
-	// + Today + "\\";
-	// File file = new File(path);
-	//
-	// if (i == 0) {// 当天用近实时搜索
-	// if (CreateIndex.getIwriter() == null) {
-	// CreateIndex.GetInstance();
-	// }
-	// DirectoryReader rd = DirectoryReader.open(
-	// CreateIndex.getIwriter(), true);
-	// singleSearchIndex.List.add(rd);
-	// } else if (file.exists() && file.listFiles().length > 0) {
-	// // 创建IndexSearcher 对象
-	//
-	// Directory directory = FSDirectory.open(new File(
-	// ServerConfig.getInstance().getLocalIndexPath()
-	// + Today + "\\"));
-	// // DirectoryReader dr = DirectoryReader.open(directory);
-	// DirectoryReader rd = DirectoryReader.open(directory);
-	// // searcharray[i] = new IndexSearcher(dr);
-	// // System.out.println(path);
-	// // MultiReader md = new MultiReader(rd);
-	// // IndexSearcher ssr = new IndexSearcher(md);
-	// // MultiSearcher fc=new
-	// singleSearchIndex.List.add(rd);
-	// singleSearchIndex.ListHis.add(rd);
-	// } else {// 不存在文件不添加查询索引
-	//
-	// }
-	//
-	// //
-	// }
-	//
-	// // if (CreateIndex.getIwriter() == null) {
-	// // CreateIndex.GetInstance();
-	// // }
-	// // IndexReader rdi = DirectoryReader.open(CreateIndex.getIwriter(),
-	// // true);
-	// // singleSearchIndex.currentSearcher = new IndexSearcher(rdi);
-	// // IndexReader[] mrd = (IndexReader[]) singleSearchIndex.List
-	// // .toArray(new IndexReader[0]);
-	// // MultiReader mr = new MultiReader(mrd);
-	// // singleSearchIndex.allSearcher = new IndexSearcher(mr);
-	// //
-	// // IndexReader[] mrdhis = (IndexReader[]) singleSearchIndex.ListHis
-	// // .toArray(new IndexReader[0]);
-	// // MultiReader mrhis = new MultiReader(mrdhis);
-	// // singleSearchIndex.historySearcher = new IndexSearcher(mrhis);
-	//
-	// } catch (Exception e) {
-	// // TODO: handle exception
-	// Logger logger = LogManager.getLogger("CreateIndex");
-	// logger.error(e.getMessage(), e);
-	// logger.exit();
-	//
-	// } finally {
-	// isChanged = false;
-	// }
-	// }
-
 	private static synchronized void syncInit() {
-		// TODO Auto-generated method stub
 		if (getSingleSearchIndex() == null) {
-			// System.out.println("SearchIndex");
 			setSingleSearchIndex(new SearchIndex());
 		}
 
 	}
 
 	private SearchIndex() {
-		// baseReader= IndexReader.open(writer, applyAllDeletes);
-		// IndexReader.open(directory)
-
-		// DirectoryReader dr = DirectoryReader.open(CreateIndex.getIwriter(),
-		// true);
-
-		// @SuppressWarnings("unused")
-		// IndexReader rd=DirectoryReader.open(CreateIndex.getIwriter(),
-		// true);
-		//
-		//
-		//
-		// IndexSearcher sr=new IndexSearcher();
-
-		// List.add(e);
-
-		// searcharray = new IndexSearcher[ServerConfig.getInstance()
-		// .getMaxSearchDays()];
 
 		try {
 			List.clear();

@@ -724,6 +724,8 @@ public class IndexServer {
 	 *            当前页
 	 * @param pagecount
 	 *            每页多少条
+	 * @param typenooutlist
+	 * 			  不包含类型列表
 	 * @return
 	 */
 	public ReturnModel SearchAll(String stringkey, Date start, Date end,
@@ -802,6 +804,7 @@ public class IndexServer {
 			if (qrkey != null) {
 				bfquery.add(qrkey, Occur.MUST);
 			}
+			
 			// 构建搜索器
 			IndexSearcher allSearcher = se.GetAllSearcher();
 			// 搜索
@@ -817,6 +820,8 @@ public class IndexServer {
 				Document doc = allSearcher.doc(docs[i].doc);
 
 				model.url = doc.get("url");
+				System.out.println(model.url + "\t releasedate:" + new Date(Long.valueOf(doc.get("releasetime"))) 
+				+ "\t spy:" + new Date(Long.valueOf(doc.get("spy"))) + "\t lzid:" + doc.get("lzid"));
 				model.tabletype = doc.get("zdbs");
 
 				if (doc.get("spy") != null) {
@@ -841,6 +846,147 @@ public class IndexServer {
 		}
 		return retmodel;
 	}
+	
+	public ReturnModel SearchAllWithTypeFilter(String stringkey, Date start, Date end,
+			Date startspy, Date endspy, int typeNo, List<String> siteNameList,
+			int pageindex, int pagecount, List<String> typenooutlist) {
+		ReturnModel retmodel = new ReturnModel();
+		try {
+			
+			// 分词
+			retmodel.analyzerlist = AnalyzerCN.DoAnalyzerCN(stringkey);
+			// 初始化搜索
+			SearchIndex se = SearchIndex.GetInstance();
+			// 检索字段 标题 内容
+			String[] strfield = { "title", "coutent" };
+			// 分词器 全命中推出
+			MultiFieldQueryParser qp = new MultiFieldQueryParser(
+					Version.LUCENE_45, strfield,
+					CreateIndex.GetInstance().analyzer);
+			qp.setDefaultOperator(Operator.AND);
+			// 查询条件
+			BooleanQuery bfquery = new BooleanQuery();
+			// 过滤条件
+			BooleanQuery blfilterquery = new BooleanQuery();
+			// 默认过滤条件为全部数据
+			blfilterquery.add(new MatchAllDocsQuery(), Occur.MUST);
+			// 查询时间不相等时增加过滤发布时间
+			if (!start.equals(end)) {
+				Query timequeryfilter = NumericRangeQuery.newLongRange(
+						"releasetime", DateTools.stringToTime(DateTools
+								.dateToString(start, Resolution.MILLISECOND)),
+								DateTools.stringToTime(DateTools.dateToString(end,
+										Resolution.MILLISECOND)), true, true);
+				blfilterquery.add(timequeryfilter, Occur.MUST);
+			}
+			// 监测时间不相等时增加检查时间过滤条件
+			if (!startspy.equals(endspy)) {
+				Query timequeryfilter = NumericRangeQuery.newLongRange("spy",
+						DateTools.stringToTime(DateTools.dateToString(startspy,
+								Resolution.MILLISECOND)), DateTools
+								.stringToTime(DateTools.dateToString(endspy,
+										Resolution.MILLISECOND)), true, true);
+				blfilterquery.add(timequeryfilter, Occur.MUST);
+			}
+			// 过滤站点标识 -1是所有站点 站点标识 (1资讯2论坛3微博4博客5QQ6搜索0其他)
+			if (typeNo != -1) {
+				Query qrtyep = null;
+				
+				Term tr = new Term("zdbs", String.valueOf(typeNo));
+				qrtyep = new TermQuery(tr);
+				blfilterquery.add(qrtyep, Occur.MUST);
+			}
+			
+			// 站点名称列表
+			if (siteNameList != null && !siteNameList.isEmpty()) {
+				BooleanQuery siteboolquery = new BooleanQuery();
+				for (String sitename : siteNameList) {
+					Term tr = new Term("zdmc", sitename);
+					Query ternquery = new TermQuery(tr);
+					siteboolquery.add(ternquery, Occur.SHOULD);
+				}
+				blfilterquery.add(siteboolquery, Occur.MUST);
+			}
+			
+			// 不包含类型列表 (站点标识 (1资讯2论坛3微博4博客5QQ6搜索0其他))
+			if (typenooutlist != null && !typenooutlist.isEmpty()) {
+				for (String typeno : typenooutlist) {
+					Term tr = new Term("zdbs", typeno);
+					Query ternquery = new TermQuery(tr);
+					blfilterquery.add(ternquery, Occur.MUST_NOT);
+				}
+			}
+			
+			// 主关键词过滤
+			Query qrkey = null;
+			if (!stringkey.equals("")) {
+				qrkey = qp.parse(stringkey);
+				
+			} else {
+				return retmodel;
+			}
+			// 把过滤条件转换成过滤器
+			Filter flmain = new QueryWrapperFilter(blfilterquery);
+			
+			// 主关键词过滤
+			if (qrkey != null) {
+				bfquery.add(qrkey, Occur.MUST);
+			}
+			
+			// 构建搜索器
+			IndexSearcher allSearcher = se.GetAllSearcher();
+			// 搜索
+			TopDocs docsall = allSearcher.search(bfquery, flmain, pageindex
+					* pagecount);
+			// 计数
+			ScoreDoc[] docs = docsall.scoreDocs;
+			retmodel.allcount = docsall.totalHits;
+			// 构建返回对象
+			for (int i = pageindex * pagecount - pagecount; i < docs.length
+					&& i < pageindex * pagecount; i++) {
+				SearchModel model = new SearchModel();
+				Document doc = allSearcher.doc(docs[i].doc);
+				
+				model.url = doc.get("url");
+				System.out.println(model.url + "\t releasedate:" + new Date(Long.valueOf(doc.get("releasetime"))) 
+				+ "\t spy:" + new Date(Long.valueOf(doc.get("spy"))) + "\t lzid:" + doc.get("lzid"));
+				model.tabletype = doc.get("zdbs");
+				
+				if (doc.get("spy") != null) {
+					Date dt = DateTools.stringToDate(DateTools.timeToString(
+							Long.parseLong(doc.get("spy")), Resolution.SECOND));
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+					Date dtnow = new Date();
+					dtnow = sdf.parse(sdf.format(dtnow));
+					if (dt.before(dtnow)) {
+						model.sqltype = "1";
+					} else {
+						model.sqltype = "0";
+					}
+				}
+				retmodel.modle.add(model);
+			}
+			
+		} catch (Exception e) {
+			Logger logger = LogManager.getLogger("CreateIndex");
+			logger.error(e.getMessage(), e);
+			logger.exit();
+		}
+		return retmodel;
+	}
+	
+	/**
+	 * 获取分词结果 
+	 */
+	public List<String> GetAnalyzeResult (String keyword) {
+		if (keyword == null || keyword.trim().equals("")) {
+			return null;
+		}
+		List<String> list = AnalyzerCN.DoAnalyzerCN(keyword);
+		return list;
+	}
+	
+	
 
 	/**
 	 * 舆情信息
@@ -1083,7 +1229,7 @@ public class IndexServer {
 
 			ScoreDoc[] docs = docsall.scoreDocs;
 			retmodel.allcount = docsall.totalHits;
-
+			
 			for (int i = pageindex * pagecount - pagecount; i < docs.length
 					&& i < pageindex * pagecount; i++) {
 				SearchModel model = new SearchModel();
@@ -1091,7 +1237,6 @@ public class IndexServer {
 
 				model.url = doc.get("url");
 				model.tabletype = doc.get("zdbs");
-
 				if (doc.get("spy") != null) {
 					Date dt = DateTools.stringToDate(DateTools.timeToString(
 							Long.parseLong(doc.get("spy")), Resolution.SECOND));
@@ -1099,12 +1244,19 @@ public class IndexServer {
 					Date dtnow = new Date();
 					dtnow = sdf.parse(sdf.format(dtnow));
 
+					System.out.println(model.url + "\t releasedate:" + new Date(Long.valueOf(doc.get("releasetime"))) 
+					+ "\t spy:" + new Date(Long.valueOf(doc.get("spy"))) + "\t lzid:" + doc.get("lzid") 
+					+ "\t title:" + doc.get("title") + "\t content:" + doc.get("coutent") + "\n");
+					
+					model.tabletype = doc.get("zdbs");
+					
 					if (dt.before(dtnow)) {
 						model.sqltype = "1";
 
 					} else {
 						model.sqltype = "0";
 					}
+//					System.out.println(dt);
 				}
 
 				retmodel.modle.add(model);

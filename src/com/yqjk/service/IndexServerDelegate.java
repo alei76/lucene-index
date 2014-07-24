@@ -34,8 +34,6 @@ import org.apache.lucene.search.grouping.GroupingSearch;
 import org.apache.lucene.search.grouping.TopGroups;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.util.Version;
-import com.sun.corba.se.spi.orbutil.fsm.State;
-import com.yqjk.service.TestZhuanTiReturnObj.objectret;
 
 @javax.jws.WebService(targetNamespace = "http://service.yqjk.com/", serviceName = "IndexServerService", portName = "IndexServerPort", wsdlLocation = "WEB-INF/wsdl/IndexServerService.wsdl")
 public class IndexServerDelegate {
@@ -46,87 +44,79 @@ public class IndexServerDelegate {
 		indexServer.CreateIndexServer(model);
 	}
 
-	public List<DayCountGroupModel> GetZhuanTiCountGroupModel(int storetype,
-			String searchkey, Date start, Date end, List<String> typenoinlist,
-			List<String> sitenamelist, List<String> lyidinlist,
-			List<String> typenooutlist, List<String> lyidoutList,
-			List<String> qqqunlist, String oldkeys, String author, int jingnei,
-			List<String> listareain, List<String> listareaout, int grouptype) {
-		return indexServer.GetZhuanTiCountGroupModel(storetype, searchkey,
-				start, end, typenoinlist, sitenamelist, lyidinlist,
-				typenooutlist, lyidoutList, qqqunlist, oldkeys, author,
-				jingnei, listareain, listareaout, grouptype);
+	public List<DayCountGroupModel> GetZhuanTiCountGroupModel(int storetype, String searchkey, Date start,
+	        Date end, List<String> typenoinlist, List<String> sitenamelist, List<String> lyidinlist,
+	        List<String> typenooutlist, List<String> lyidoutList, List<String> qqqunlist, String oldkeys,
+	        String author, int jingnei, List<String> listareain, List<String> listareaout, int grouptype) {
+		return indexServer.GetZhuanTiCountGroupModel(storetype, searchkey, start, end, typenoinlist,
+		        sitenamelist, lyidinlist, typenooutlist, lyidoutList, qqqunlist, oldkeys, author, jingnei,
+		        listareain, listareaout, grouptype);
 	}
 
-	public List<DayCountModel> GetZhuanTiCountModel(int storetype,
-			int sortbyfbtime, String searchkey, Date start, Date end,
-			List<String> typenoinlist, List<String> sitenamelist,
-			List<String> lyidinlist, List<String> typenooutlist,
-			List<String> lyidoutList, List<String> qqqunlist, String oldkeys,
-			String author, int jingnei, List<String> listareain,
-			List<String> listareaout) {
-		return indexServer.GetZhuanTiCountModel(storetype, sortbyfbtime,
-				searchkey, start, end, typenoinlist, sitenamelist, lyidinlist,
-				typenooutlist, lyidoutList, qqqunlist, oldkeys, author,
-				jingnei, listareain, listareaout);
+	public List<DayCountModel> GetZhuanTiCountModel(int storetype, int sortbyfbtime, String searchkey,
+	        Date start, Date end, List<String> typenoinlist, List<String> sitenamelist,
+	        List<String> lyidinlist, List<String> typenooutlist, List<String> lyidoutList,
+	        List<String> qqqunlist, String oldkeys, String author, int jingnei, List<String> listareain,
+	        List<String> listareaout) {
+		return indexServer.GetZhuanTiCountModel(storetype, sortbyfbtime, searchkey, start, end, typenoinlist,
+		        sitenamelist, lyidinlist, typenooutlist, lyidoutList, qqqunlist, oldkeys, author, jingnei,
+		        listareain, listareaout);
 	}
 
-	public List<NameKeySort> GetZhuanTiGroup(int storetype, String searchkey,
-			Date start, Date end, List<String> typenoinlist,
-			List<String> sitenamelist, List<String> lyidinlist,
-			List<String> typenooutlist, List<String> lyidoutList,
-			List<String> qqqunlist, String oldkeys, String author, int jingnei,
-			List<String> listareain, List<String> listareaout, int grouptype) {
-		return indexServer.GetZhuanTiGroup(storetype, searchkey, start, end,
-				typenoinlist, sitenamelist, lyidinlist, typenooutlist,
-				lyidoutList, qqqunlist, oldkeys, author, jingnei, listareain,
-				listareaout, grouptype);
+	public List<NameKeySort> GetZhuanTiGroup(int storetype, String searchkey, Date start, Date end,
+	        List<String> typenoinlist, List<String> sitenamelist, List<String> lyidinlist,
+	        List<String> typenooutlist, List<String> lyidoutList, List<String> qqqunlist, String oldkeys,
+	        String author, int jingnei, List<String> listareain, List<String> listareaout, int grouptype) {
+		return indexServer.GetZhuanTiGroup(storetype, searchkey, start, end, typenoinlist, sitenamelist,
+		        lyidinlist, typenooutlist, lyidoutList, qqqunlist, oldkeys, author, jingnei, listareain,
+		        listareaout, grouptype);
 	}
 
-	public ReturnModel GetZhuanTiSearchAll(int storetype, int sortbyfbtime,
-			String searchkey, Date start, Date end, List<String> typenoinlist,
-			List<String> sitenamelist, List<String> lyidinlist,
-			List<String> typenooutlist, List<String> lyidoutList,
-			List<String> qqqunlist, String oldkeys, String author, int jingnei,
-			List<String> listareain, List<String> listareaout, int pageindex,
-			int pagecount) {
-		return indexServer.GetZhuanTiSearchAll(storetype, sortbyfbtime,
-				searchkey, start, end, typenoinlist, sitenamelist, lyidinlist,
-				typenooutlist, lyidoutList, qqqunlist, oldkeys, author,
-				jingnei, listareain, listareaout, pageindex, pagecount);
+	public ReturnModel GetZhuanTiSearchAll(int storetype, int sortbyfbtime, String searchkey, Date start,
+	        Date end, List<String> typenoinlist, List<String> sitenamelist, List<String> lyidinlist,
+	        List<String> typenooutlist, List<String> lyidoutList, List<String> qqqunlist, String oldkeys,
+	        String author, int jingnei, List<String> listareain, List<String> listareaout, int pageindex,
+	        int pagecount) {
+		return indexServer.GetZhuanTiSearchAll(storetype, sortbyfbtime, searchkey, start, end, typenoinlist,
+		        sitenamelist, lyidinlist, typenooutlist, lyidoutList, qqqunlist, oldkeys, author, jingnei,
+		        listareain, listareaout, pageindex, pagecount);
 	}
 
-	public ReturnModel SearchAll(String stringkey, Date start, Date end,
-			Date startspy, Date endspy, int typeNo, List<String> siteNameList,
-			int pageindex, int pagecount) {
-		return indexServer.SearchAll(stringkey, start, end, startspy, endspy,
-				typeNo, siteNameList, pageindex, pagecount);
+	public ReturnModel SearchAll(String stringkey, Date start, Date end, Date startspy, Date endspy,
+	        int typeNo, List<String> siteNameList, int pageindex, int pagecount) {
+		return indexServer.SearchAll(stringkey, start, end, startspy, endspy, typeNo, siteNameList,
+		        pageindex, pagecount);
 	}
 
-	public ReturnModel GetMessageSearchAll(int storetype, int sortbyfbtime,
-			String searchkey, Date start, Date end, List<String> typenoinlist,
-			List<String> sitenamelist, List<String> lyidinlist,
-			List<String> typenooutlist, List<String> lyidoutList,
-			List<String> qqqunlist, String oldkeys, String author, int jingnei,
-			List<String> listareain, List<String> listareaout, int pageindex,
-			int pagecount) {
-		return indexServer.GetMessageSearchAll(storetype, sortbyfbtime,
-				searchkey, start, end, typenoinlist, sitenamelist, lyidinlist,
-				typenooutlist, lyidoutList, qqqunlist, oldkeys, author,
-				jingnei, listareain, listareaout, pageindex, pagecount);
+	public ReturnModel SearchAllWithTypeFilter(String stringkey, Date start, Date end, Date startspy,
+	        Date endspy, int typeNo, List<String> siteNameList, int pageindex, int pagecount,
+	        List<String> typenooutlist) {
+		return indexServer.SearchAllWithTypeFilter(stringkey, start, end, startspy, endspy, typeNo,
+		        siteNameList, pageindex, pagecount, typenooutlist);
 	}
 
-	public ReturnModel GetNetSearchAll(int sortbyfbtime, String searchkey,
-			Date start, Date end, List<String> typenoinlist,
-			List<String> sitenamelist, List<String> lyidinlist,
-			List<String> typenooutlist, List<String> lyidoutList,
-			List<String> qqqunlist, String oldkeys, String author, int jingnei,
-			List<String> listareain, List<String> listareaout, int pageindex,
-			int pagecount) {
-		return indexServer.GetNetSearchAll(sortbyfbtime, searchkey, start, end,
-				typenoinlist, sitenamelist, lyidinlist, typenooutlist,
-				lyidoutList, qqqunlist, oldkeys, author, jingnei, listareain,
-				listareaout, pageindex, pagecount);
+	public List<String> GetAnalyzeResult(String keyword) {
+		return indexServer.GetAnalyzeResult(keyword);
+	}
+
+	public ReturnModel GetMessageSearchAll(int storetype, int sortbyfbtime, String searchkey, Date start,
+	        Date end, List<String> typenoinlist, List<String> sitenamelist, List<String> lyidinlist,
+	        List<String> typenooutlist, List<String> lyidoutList, List<String> qqqunlist, String oldkeys,
+	        String author, int jingnei, List<String> listareain, List<String> listareaout, int pageindex,
+	        int pagecount) {
+		return indexServer.GetMessageSearchAll(storetype, sortbyfbtime, searchkey, start, end, typenoinlist,
+		        sitenamelist, lyidinlist, typenooutlist, lyidoutList, qqqunlist, oldkeys, author, jingnei,
+		        listareain, listareaout, pageindex, pagecount);
+	}
+
+	public ReturnModel GetNetSearchAll(int sortbyfbtime, String searchkey, Date start, Date end,
+	        List<String> typenoinlist, List<String> sitenamelist, List<String> lyidinlist,
+	        List<String> typenooutlist, List<String> lyidoutList, List<String> qqqunlist, String oldkeys,
+	        String author, int jingnei, List<String> listareain, List<String> listareaout, int pageindex,
+	        int pagecount) {
+		return indexServer.GetNetSearchAll(sortbyfbtime, searchkey, start, end, typenoinlist, sitenamelist,
+		        lyidinlist, typenooutlist, lyidoutList, qqqunlist, oldkeys, author, jingnei, listareain,
+		        listareaout, pageindex, pagecount);
 	}
 
 	public boolean HistoryExist(String url) {
